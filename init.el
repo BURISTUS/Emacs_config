@@ -151,3 +151,40 @@
            ;; uncomment if lldb-mi is not in PATH
            ;; :lldbmipath "path/to/lldb-mi"
            ))))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(helm-projectile mood-one-theme helm yasnippet which-key use-package toml-mode selectrum rustic lsp-ui flycheck exec-path-from-shell company)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+;;evil mode
+(add-to-list 'load-path "~/.emacs.d/evil")
+(require 'evil)
+(evil-mode 1)
+(global-undo-tree-mode)
+(add-hook 'evil-local-mode-hook 'turn-on-undo-tree-mode)
+;;which key
+(add-to-list 'load-path "path/to/which-key.el")
+(require 'which-key)
+(which-key-mode)
+;;Default theme
+(load-theme 'wombat)
+;;Melpa
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+;;Helm
+(global-set-key (kbd "M-x") 'helm-M-x)          
+;;evil-mode-redo
+
+
+
+
+
+
