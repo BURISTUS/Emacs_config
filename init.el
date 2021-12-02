@@ -5,7 +5,6 @@
 
 ;; -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 ;; rustic = basic rust-mode + additions
-
 (use-package rustic
   :ensure
   :bind (:map rustic-mode-map
@@ -157,7 +156,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(helm-projectile mood-one-theme helm yasnippet which-key use-package toml-mode selectrum rustic lsp-ui flycheck exec-path-from-shell company)))
+   '(treemacs-evil helm-projectile mood-one-theme helm yasnippet which-key use-package toml-mode selectrum rustic lsp-ui flycheck exec-path-from-shell company)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -170,6 +169,7 @@
 (evil-mode 1)
 (global-undo-tree-mode)
 (add-hook 'evil-local-mode-hook 'turn-on-undo-tree-mode)
+(define-key evil-ex-map "m" 'magit-blame)
 ;;which key
 (add-to-list 'load-path "path/to/which-key.el")
 (require 'which-key)
@@ -180,9 +180,39 @@
 (add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 ;;Helm
-(global-set-key (kbd "M-x") 'helm-M-x)          
-;;evil-mode-redo
+(require 'helm)
 
+(setq-default helm-M-x-fuzzy-match t)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(define-key evil-ex-map "x" 'helm-M-x)
+
+(define-key evil-ex-map "b " 'helm-mini)
+(define-key evil-ex-map "e" 'helm-find-files)
+;;evil-mode-redo
+(global-undo-tree-mode)
+(evil-set-undo-system 'undo-tree)
+;;disable startup screen
+(setq inhibit-startup-screen t)
+;;Helm-projectile
+(require 'helm-projectile)
+(define-key evil-ex-map "g" 'helm-projectile-grep)
+(define-key evil-ex-map "f" 'helm-projectile-find-file)
+;;disable interface
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+;;nums of string
+(global-display-line-numbers-mode 1)
+;;treemacs
+(use-package treemacs
+  :ensure t)
+;;visit init.el by fn call
+(defun config-visit ()
+  (interactive)
+  (find-file "~/.emacs.d/init.el"))
+;;helm-projectile
+(require 'helm-projectile)
+(helm-projectile-on)
 
 
 
