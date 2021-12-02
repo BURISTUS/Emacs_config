@@ -156,7 +156,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(treemacs-evil helm-projectile mood-one-theme helm yasnippet which-key use-package toml-mode selectrum rustic lsp-ui flycheck exec-path-from-shell company)))
+   '(dap-mode treemacs-evil helm-projectile mood-one-theme helm yasnippet which-key use-package toml-mode selectrum rustic lsp-ui flycheck exec-path-from-shell company)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -213,6 +213,10 @@
 ;;helm-projectile
 (require 'helm-projectile)
 (helm-projectile-on)
+;:evil-mode-yank-fix
+(defun bb/evil-delete (orig-fn beg end &optional type _ &rest args)
+    (apply orig-fn beg end type ?_ args))
+(advice-add 'evil-delete :around 'bb/evil-delete)
 
 
 
