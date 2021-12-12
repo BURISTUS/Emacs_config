@@ -126,37 +126,13 @@
 ;; -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 ;; setting up debugging support with dap-mode
 
-(use-package exec-path-from-shell
-  :ensure
-  :init (exec-path-from-shell-initialize))
-
-(when (executable-find "lldb-mi")
-  (use-package dap-mode
-    :ensure
-    :config
-    (dap-ui-mode)
-    (dap-ui-controls-mode 1)
-
-    (require 'dap-lldb)
-    (require 'dap-gdb-lldb)
-    ;; installs .extension/vscode
-    (dap-gdb-lldb-setup)
-    (dap-register-debug-template
-     "Rust::LLDB Run Configuration"
-     (list :type "lldb"
-           :request "launch"
-           :name "LLDB::Run"
-	   :gdbpath "rust-lldb"
-           ;; uncomment if lldb-mi is not in PATH
-           ;; :lldbmipath "path/to/lldb-mi"
-           ))))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(dap-mode treemacs-evil helm-projectile mood-one-theme helm yasnippet which-key use-package toml-mode selectrum rustic lsp-ui flycheck exec-path-from-shell company)))
+   '(lsp-ui lsp-mode lsp-treemacs zenburn-theme treemacs-evil helm-projectile mood-one-theme helm yasnippet which-key use-package toml-mode selectrum rustic flycheck exec-path-from-shell company)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -175,7 +151,7 @@
 (require 'which-key)
 (which-key-mode)
 ;;Default theme
-(load-theme 'wombat)
+(load-theme 'zenburn t)
 ;;Melpa
 (add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
